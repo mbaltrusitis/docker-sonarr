@@ -11,15 +11,15 @@ RUN echo 'debconf debconf/frontend select Noninteractive' | debconf-set-selectio
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-RUN chown -R nobody:users /opt/NzbDrone \
-  ; mkdir -p /volumes/config/sonarr /volumes/completed /volumes/media \
-  && chown -R nobody:users /volumes
+# RUN chown -R nobody:users /opt/NzbDrone \
+#   ; mkdir -p /volumes/config/sonarr /volumes/completed /volumes/media \
+#   && chown -R nobody:users /volumes
 
 EXPOSE 8989
 EXPOSE 9898
-VOLUME /volumes/config
-VOLUME /volumes/completed
-VOLUME /volumes/media
+VOLUME /configdata/sonarr/config
+VOLUME /mediadata/downloads/tv
+VOLUME /mediadata/library/TV\ Shows
 
 ADD start.sh /
 RUN chmod +x /start.sh
